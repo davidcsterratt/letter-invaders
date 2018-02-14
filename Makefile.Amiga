@@ -1,0 +1,22 @@
+#
+# Makefile for letters, a game to help improve typing skills
+#
+# Ported to the Amiga/SAS C 5.10a by Brent Nordquist
+#   (brent@limabean.veggard.mn.org)
+#
+# copyright 1991 by Larry Moss (lm03_cif@uhura.cc.rochester.edu)
+#
+
+.c.o:
+	$(CC) $(CFLAGS) $*
+
+CC	= lc
+LN	= blink
+CFLAGS	= -dSYSV -j85 -O
+EXE	= LetterInvaders
+OBJS	= letters.o amikinput.o term.o word.o highscore.o amiraw.o
+
+$(EXE):	$(OBJS) lib:termcap.lib lib:local.lib
+	$(LN) LIBRARY amitermcap.lib LIB:lcm.lib LIB:lc.lib LIB:amiga.lib\
+		TO LetterInvaders FROM LIB:c.o+letters.o+amikinput.o+\
+		term.o+word.o+highscore.o+amiraw.o

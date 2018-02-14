@@ -1,0 +1,81 @@
+#
+# Makefile for letters, a game to help improve typing skills
+#
+# copyright 1991 by Larry Moss (lm03_cif@uhura.cc.rochester.edu)
+#
+
+CC = tcc
+#CC = gcc
+#SYSTYPE = SYSV
+#SYSTYPE = NEXT
+#SYSTYPE = BSD
+SYSTYPE = MSDOS
+# if you don't have job control add -DNOJOB to CFLAGS
+CFLAGS = -O -v -D$(SYSTYPE) \
+	-DDICTIONARY="$(DICTIONARY)" -DNOJOB
+LDFLAGS = 
+#LDFLAGS = -ltermcap
+BINDIR = $(HOME)/bin-sun4
+MANDIR = $(HOME)/man/man$(MANEXT)
+MANEXT = 6
+LIBDIR = $(HOME)/lib
+#DICTIONARY = /usr/dict/words
+DICTIONARY = dictfile
+
+# next line only needed if you need to create a dictionary file.  The files
+# in this directory will be used to make a wordlist.
+DOCDIR = $(HOME)/man
+
+# If your machine doesn't have usleep uncomment it in the following line.
+# I know this includes ultrix 4.2 and hp-ux 7.? and many sys V based machines.
+# Don't know about others. if you need usleep and your machine does not have
+# select, change usleep.obj to usleep5.obj (mostly sysV machines).
+OBJS = letters.obj kinput.obj term.obj word.obj highscore.obj usleeptc.obj
+
+# The following line will stop gcc from complaining about the arguments
+# sun's make uses.  It shouldn't bother anyone else.
+
+letters.exe: $(OBJS)
+	$(CC) -eletters $(CFLAGS) $(OBJS) $(LDFLAGS)
+
+letters.obj word.obj kinput.obj: \
+		kinput.h
+letters.obj term.obj highscore.obj kinput.obj: \
+		term.h
+letters.obj highscore.obj kinput.obj: \
+		terms.h
+word.obj highscore.obj letters.obj: \
+		config.h
+
+install: letters
+	install -s -m 2755 letters $(BINDIR)
+	sed -e 's;LIBDIR;$(LIBDIR);' -e 's;DICTIONARY;$(DICTIONARY);'\
+		letters.man > letters.$(MANEXT)
+	install -c -m 0644 letters.$(MANEXT) $(MANDIR)/letters.$(MANEXT)
+	if [ ! -f $(LIBDIR)/letters.high ] ;then \
+		install -c -m 0664 letters.high $(LIBDIR) ;fi
+
+install_hpux: letters
+	install -c $(BINDIR) letters
+	install -c $(MANDIR) letters.man
+	install -c $(LIBDIR) letters.high
+	chmod 0666 $(LIBDIR)/letters.high
+
+clean:
+	rm -f rm *.obj letters.exe
+
+shar:
+	shar -o letters.shar *.[ch] Makefile letters.man letters.high README
+
+tar:
+	tar cf letters.tar *.[ch] Makefile letters.man letters.high README
+
+dict:
+	awk '{ for (i = 0; i <= NF; ++i)\
+		if($$i ~ /^[a-zA-Z][a-z]*$$/) { print $$i } }'\
+		`find $(DOCDIR) -type f -print` |\
+		sort -u > $(DICTIONARY)
+.c.obj:
+	$(CC) $(CFLAGS) -c $*.c
+
+.SUFFIXES:	.obj .c

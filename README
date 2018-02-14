@@ -1,0 +1,116 @@
+Letter Invaders v2.1
+A game to help improve typing skills.
+=====================================
+
+Copying:
+
+Please put this on as many different machines as you like.  If you make
+changes or bug fixes, please mail them to me so they can be incorporated
+into later versions.  Feel free to use the entire program or portions of
+it in any way you like as long as I get credit for what I've done.
+
+
+Installation:
+
+--UNIX--
+
+Installation of letters should be fairly simple.  A few lines in the
+Makefile should be changed to reflect the directories where the files
+should be installed.  Config.h may (but shouldn't) require a couple of
+changes.  After making the minor changes, "make install" or "make
+install_hpux" should do all the work.  The hpux installation could be
+improved, but it is enough to get it up and running.  If your system does
+not have /usr/dict/words or any other large collection of words you can
+use "make dict" to create a wordlist.  Well, it works for me, but I use
+awk to do it so I know someone is bound to have a problem.
+
+So far it has been compiled and run under SunOS 4.0 and 4.1.1, SCO Xenix,
+ULTRIX 4.2, hpux 7.05, NeXTStep and a large number of others.  When
+compiling it on the NeXT it produces a number of warnings but there are
+no serious problems (I'd fix it, but my access to a NeXT is fairly
+limited so I just made sure it compiles).  Please let me know about any
+other platforms that it gets compiled on or fails to get compiled on.
+
+--MS-DOS--
+
+The MS-DOS port is specifically for Turbo C.  I don't know it it will
+work with any other C compiler.  Substitute Makefile.tc for Makefile and
+run make.  There shouldn't be too much that needs to be changed.
+
+--Amiga--
+
+There are a few files that are included here that are different for the
+amiga version.  There is also a Makefile.amiga that should work with SAS
+C.  Look at the README.amiga file for more information.  This port is
+complete, but the amiga termcap library is not included.  All UNIX
+specific and Amiga specific stuff has been kept separate so that it will
+be easy to keep versions the same if/when the game is improved.  In the
+past, the amiga specific code was not included with the UNIX sources, but
+a number of people have asked for it and I wanted to get everyone up to
+the same version of the program in one shot.  In the future I will probably
+separate them again.
+
+--MINIX--
+
+I'd like to mention that there is a minix version of the game available.
+The changes to make it compile under minix are not included in this
+package (although there have been enough changes to accomodate other
+systems that it might not be too much work any more to get it to compile
+on minix).  Credit for the minix version (and comments and questions) to
+Wim van Dorst (baron@wiesje.hobby.nl).  I've been told the minix version
+can be found on your favorite minix archive site.
+
+authors
+-------
+Larry Moss (lm03_cif@uhura.cc.rochester.edu) - original game, UNIX version
+Brent J. Nordquist (brent@limabean.veggard.mn.org) - amiga version, bug
+	fixes, improvements.
+
+Thanks to (those not in man page):  
+----------------------------------
+
+D. A. Gwyn.  I have used his code for usleep() to get it to compile on
+machines that don't have it.  Since the code is included in the FAQ
+posted to comp.unix.questions I assume this is ok.  If someone knows
+otherwise please let me know.
+
+Kim Storm.  I used his nn code as a reference when trying to figure out
+how to use the termcap library.
+
+Wim van Dorst (baron@wiesje.hobby.nl).  Creator of the minix version of
+the game.
+
+
+Future plans:
+
+None at the moment.  I planned on rewriting it since the code has gotten
+rather messy with all the changes and ports to different platforms.  With
+a bit of reorganization the code can probably be reduced in size
+drastically.  (For example, most of the SYSV2 stuff would probably work on
+many more platforms, but I don't have access to enough machines to try it
+out a whole lot.)  The way things have gone in the last few months I don't
+expect to do much more work on it.  I may change my mind, but I'm having
+trouble with my hands and I've lost interest in developing a typing
+tutor.  I won't ignore the program, but I won't necessarily respond
+immediately with bug fixes.  If someone else would like to take over
+development and support of the game, let me know.
+
+Here's what I said in the past about future stuff...
+
+I had at one time planned to have bonus words fly horizontally across
+screen, but I never bothered with implementing it.  Instead, I just got a
+suggestion to have the bonus words come down like the others, but
+underlined.  When a bonus word is typed correctly it will take out the
+whole screen with it.  This could add a bit of strategy to the game.
+
+interesting things should happen at higher levels.  Now it just keeps
+getting faster.  I've gotten the suggestion of possibly having some words
+on the screen change randomly to force you to watch the screen more
+carefully.
+
+I've considered using this as an excuse to learn X programming.  I figure
+that way words can really explode.  This will only happen if I find
+myself with a lot of free time.
+
+Frequently mistyped words should come back later in the game.  This would
+certainly make the game more useful as a typing tutor.

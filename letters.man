@@ -1,0 +1,128 @@
+.TH LETTERS 6 "23 SEPT 1991"
+.SH NAME
+letters \- a game to improve typing skills
+.SH SYNOPSIS
+\fBletters\fP [-q | -b] [-l#] [-H#] [-ddictionary | -sstring]
+.br
+\fBletters\fP [-h]
+.SH DESCRIPTION
+\fBLetters\fP is based on \fBLetter Invaders\fP which was around in the PC
+environment several years ago.  It in turn was based on the popular
+arcade style game, \fBSpace Invaders\fP.  For those not familiar with
+\fBSpace Invaders\fP \ (please let me know if you're one of these people
+and let me know what planet you've been living on :-) the idea is to blast
+aliens out of the sky as they attempt to land on and "kill" you.  Since
+this is a game to improve typing skills, the aliens are words selected
+randomly from the dictionary.  You blast the aliens out of the sky by
+typing them correctly.
+.PP
+Playing the game is very straight forward.  Type words as they appear on
+the screen.  They will slowly drop until you have either typed them
+correctly or they reach the status line on the bottom of the screen.  If
+a word makes it to the bottom of the screen you lose one "life".  This is
+actually a non-violent game.  The words "kill" and "life" are only used
+in this context for historical reasons.
+.PP
+If at any point you type a letter incorrectly the entire word is reset.
+The backspace key will not save you if you're a sloppy typist.  
+It is not necessary to type words in the order they appear on the
+screen.  In fact, that is often not the
+best action to take.  Very short words fall faster than longer ones.
+The program will attempt to determine the word you are
+trying to type by matching what you've typed with the first letter(s) of
+all other words on the screen.  Unlike in previous versions the program
+tries to determine what word you are typing by more than the first
+letter.  The highlight bar doesn't move to a new word until it is clear
+which word is being typed.
+.PP
+If you successfully complete 3 rounds of play you get a bonus life and
+you get the opportunity to play a bonus round.  The bonus round is played
+the same as all other rounds but the words are strings of random
+printable characters.  The round is played at the same speed as whatever
+level you were on and likewise points are computed the same as in that
+round. since this is just a bonus round, you can only gain points.  You
+cannot die.  The round lasts as long as all other rounds (15 words)
+unless a word reaches the bottom of the screen.
+.SH "Special Keys"
+.IP
+ctrl-L	Redraw screen.
+.IP
+ctrl-C	Exit from the game.  You will be prompted before exiting to make
+sure that's really what you wanted to do.  Since it prompts you this can
+also be used as a method of pausing the game.  This is actually whatever
+your interrupt character is.  Ctrl-C is just most common.
+.IP
+ctrl-N	Skip to next level.  The game does correctly keep track of how
+many levels you have completed.  (See '-l' under \fBOPTIONS\fP)
+.IP
+ctrl-Z	Works as it should.  If your system has job control it will stop
+the process.
+.SH OPTIONS
+.IP
+-q	quiet mode (default) - turn off the obnoxious beep
+.IP
+-h	Show high scores.
+.IP
+-b	Beep when words are completed or mistyped.
+.IP
+-l#	# is the level number that you want to start at.  The level will
+not increase until you have completed the number of rounds equal to your
+starting level.  In other words, if you start on level 5, you need to
+play through 5 rounds before the level increases to 6 (and the speed
+increases and scoring changes).
+-H#	# is a handicap applied to the speed that the words fall.  By
+default the handicap is 1.  This is really only useful for someone just
+learning to type that need the words to fall slower than they normally do
+on level 1.  Since the speed is reduced drastically by higher handicaps,
+scores obtained with a handicap greater than 1 are not saved to the high
+score list.
+.IP
+-ddictionary
+	Dictionary is the pathname of an alternate source of randomly
+selected target words. Useful for alternate spellings or special typing
+exercise wordlists.  Scores obtained will not effect the high score file.
+.IP
+-sstring
+	String is a character string from which randomly generated
+words will be chosen. Characters are copied in order, wrapping around
+from the end of the string to the beginning. Bonus words are constructed
+from characters chosen from the string in random order. Useful for
+exercises based around small sets of typewriter keys, such as the home
+row.  High scores will not be saved to the high score list.
+.SH SCORING
+A word's point value = (# of letters) + 2 * (current level).  No points
+are added for partially typed words.  Successful completion of bonus
+rounds increases your score by 10 * level.
+.SH "STATUS LINE"
+It's fairly obvious what most of the things on the status line are.  The
+last thing on the line however is words per minute.  This is computed at
+the end of each round based on 5 letter words.  It's not a particularly
+accurate measure of your typing speed, but I think it's an interesting
+enough statistic to justify filling up the empty space on the status line.
+.SH FILES
+DICTIONARY
+.br
+LIBDIR/letters.high
+.SH BUGS
+"Transmogrifier" doesn't appear frequently.
+.SH AUTHORS
+Larry Moss (lm03_cif@uhura.cc.rochester.edu) - original game, UNIX version
+.br
+Brent Nordquist (brent@limabean.veggard.mn.org) - amiga version, also
+fixed some of bugs.
+.SH THANKS
+Chris Uppal (chrisu@sco.com) for contributing enormously to the
+program with a couple of bug fixes, variable speed words, some
+performance improvements, SYSV compatibility, and many suggestions.
+.sp
+Brad Keister (keister@poincare.phys.cmu.edu.  Ported it to MS-DOS and
+added the -H option.
+.sp
+Adrian Godwin (agodwin@acorn.co.uk).  Ported it to system Vr2.  Added the
+-s and -d options.
+.sp
+Mark Levinson (mrle_cif@uhura.cc.rochester.edu) for pointing out the bug
+listed above.
+.sp
+Thanks also to everyone else that's sent me mail with comments and/or
+suggestions.

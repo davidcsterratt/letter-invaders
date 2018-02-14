@@ -1,0 +1,52 @@
+Amiga VERSION NOTES----------------------------------------------------------
+
+Before you begin, uudecode the "LetterInvaders.info" file.  This is the icon
+used from the Workbench.
+
+The binary that comes with this distribution expects to find two files:
+
+    (a) Words are kept in the file DICT:words -- this file is in the same
+	format as /usr/dict/words on UNIX systems, that is:  one word per
+	line, sorted in ASCII order.  (The AmigaDOS Sort command will sort
+	them in the proper order.)  You must assign DICT: to the directory
+	that contains this file.
+
+    (b) High scores are kept in the file S:letters.high -- copy this file
+	into S: before playing.
+
+The Amiga version can be played from CLI or from the Workbench; however,
+note that in this version, command-line options (-h for high score display,
+-l# for setting initial level, etc.) are ONLY supported from the CLI.
+
+If the environment variable USER is set (i.e. SetEnv USER john), this name
+will be used for the high scores file.  If there is no USER variable, the
+game will prompt you to enter your name for the high scores file.
+
+COMPILING--------------------------------------------------------------------
+
+This version of letters should compile fine with SAS/C v5.10a.  To do this:
+
+(1)  Uudecode the "amitermcap.lib" file.
+(2)  Copy "Makefile.amiga" to "Makefile".
+(3)  Edit "config.h" to customize DICTIONARY and HIGHSCORES where you want
+     them.  (This can't be done in the Makefile due to a bug in the way
+     -dFOOSTRING="string" is passed to LC1.)  For example, the binary that
+     comes with this distribution is set up as follows:
+	#define DICTIONARY	"DICT:words"
+	#define HIGHSCORES	"S:letters.high"
+(4)  Run lmk.
+
+Note the use of the ami* files:  amikinput.c is used in place of kinput.c,
+and amiraw.c/amitermcap* are additional files that are linked in.
+
+The amitermcap* files are a crude termcap capability for the Amiga.  The
+code is really ugly, so I'm not releasing it.  (Actually, by this standard,
+I shouldn't be releasing amikinput.c either. :-)  I hope to rewrite a real
+package some time in the future.  (If you look closely at the .h file,
+you'll see where I got this. ;-)
+
+FOR FURTHER INFORMATION------------------------------------------------------
+
+           Brent J. Nordquist
+Internet:  brent@limabean.veggard.mn.org
+MaBellNet: (719) 630-0857
