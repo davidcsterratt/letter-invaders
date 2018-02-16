@@ -18,17 +18,18 @@ CFLAGS = -O -D$(SYSTYPE) -DHIGHSCORES=\"$(LIBDIR)/letters.high\" \
 
 LDFLAGS = -ltermcap
 
-BINDIR = /usr/local/bin
-MANDIR = /usr/local/man/man$(MANEXT)
+PREFIX = /usr/local
+BINDIR = $(PREFIX)/bin
+MANDIR = $(PREFIX)/man/man$(MANEXT)
 MANEXT = 6
-LIBDIR = /usr/local/lib
+LIBDIR = $(PREFIX)/lib
 DICTIONARY = /usr/share/dict/words
 #DICTIONARY = dictfile
-INSTALL = /usr/ucb/install
+INSTALL = /usr/bin/install
 
 # next line only needed if you need to create a dictionary file.  The files
 # in this directory will be used to make a wordlist.
-DOCDIR = /usr/local/man
+DOCDIR = $(PREFIX)/man
 
 # If your machine doesn't have usleep uncomment it in the following line.
 # I know this includes ultrix 4.2 and hp-ux 7.? and many sys V based machines.
@@ -57,7 +58,7 @@ install: letters
 	$(INSTALL) -s -m 2755 letters $(BINDIR)
 	sed -e 's;LIBDIR;$(LIBDIR);' -e 's;DICTIONARY;$(DICTIONARY);'\
 		letters.man > letters.$(MANEXT)
-	$(INSTALL) -c -m 0644 letters.$(MANEXT) $(MANDIR)/letters.$(MANEXT)
+	$(INSTALL) -c -D -m 0644 letters.$(MANEXT) $(MANDIR)/letters.$(MANEXT)
 	if [ ! -f $(LIBDIR)/letters.high ] ;then \
 		$(INSTALL) -c -m 0664 letters.high $(LIBDIR) ;fi
 
