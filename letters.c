@@ -2,6 +2,7 @@
  * letters.c: A simple game to help improve typing skills.
  *
  * copyright 1991 Larry Moss (lm03_cif@uhura.cc.rochester.edu)
+ * copyright 2018 David C Sterratt (david.c.sterratt@ed.ac.uk)
  */
 
 #ifdef __TURBOC__
@@ -15,6 +16,7 @@
 #define TRUE	1
 #define FALSE	0
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -66,9 +68,6 @@ struct s_word *searchstr(), *searchchar();
 void kill_word();
 int (*ding)();
 
-#ifndef __TURBOC__
-char *malloc();
-#endif
 void free();
 
 #ifdef SYSV2

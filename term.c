@@ -14,6 +14,7 @@
  * more like his code than I planned on.  I hope I haven't gone overboard.
  */
 
+#include <stdlib.h>
 #include <stdio.h>
 #ifndef NEXT
 # ifdef AMIGA

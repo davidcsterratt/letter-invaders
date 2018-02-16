@@ -10,7 +10,9 @@
 # define fputs(A,B) cputs(A)
 #endif
 
+#include <stdlib.h>
 #include <stdio.h>
+# include <string.h>
 #ifdef AMIGA
 # include <stdlib.h>
 # include <string.h>

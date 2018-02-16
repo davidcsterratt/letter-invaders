@@ -4,6 +4,7 @@
  * copyright 1991 Larry Moss (lm03_cif@uhura.cc.rochester.edu)
  */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>

@@ -22,7 +22,7 @@ BINDIR = /usr/local/bin
 MANDIR = /usr/local/man/man$(MANEXT)
 MANEXT = 6
 LIBDIR = /usr/local/lib
-DICTIONARY = /usr/dict/words
+DICTIONARY = /usr/share/dict/words
 #DICTIONARY = dictfile
 INSTALL = /usr/ucb/install
 
